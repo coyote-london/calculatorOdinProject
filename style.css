@@ -1,0 +1,60 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(51, 51, 43);
+}
+
+.row {
+    display: flex;
+}
+
+.displayContent {
+    color: rgb(177, 170, 102);
+    font-weight: 700;
+    font-size: 4.5vw;
+    margin: 2vw;
+}
+
+#display {
+    display: flex;
+    justify-content: center;
+    min-width: 60vw;
+    min-height: 7vw;
+    margin: 2vw;
+    border: .72vw solid rgb(177, 170, 102);
+    border-radius: 1.2vw;
+}
+
+#rowClear {
+    display: flex;
+    justify-content: center;
+}
+#buttonClear {
+    min-width: 30vw;
+
+}
+
+#headingTitle {
+    font-size: 7.7vw;
+    color: rgb(177, 170, 102);
+    margin-bottom: 3.5vw;
+    margin-top: 3.5vw
+}
+
+.container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button {
+    font-weight: 700;
+    min-width: 11vw;
+    min-height: 7vw;
+    margin: 2vw;
+    border-radius: 1.2vw;
+    border:.4vw solid rgb(177, 170, 102);
+    background-color: rgb(51, 51, 40);
+    color: rgb(177, 170, 102);   
+}
