@@ -28,9 +28,9 @@ let calculator = {
     storeNumber(){
         this.numberFirst == undefined 
         ?
-        this.numberFirst = parseInt(this.input) 
+        this.numberFirst = parseFloat(this.input) 
         :
-        this.numberSecond = parseInt(this.input);
+        this.numberSecond = parseFloat(this.input);
         this.input = '';
     }
     ,
@@ -102,6 +102,14 @@ let calculator = {
         this.input = '';
     }
     ,
+    clear() {
+        this.numberFirst = undefined;
+        this.operatorStored = undefined;
+        this.numberSecond = undefined;
+        this.input = '';
+        this.display(0);
+    }
+    ,
     display(num1, operator='', num2='') {
             operator == '' ?
             document.getElementById('displayContent')
@@ -112,6 +120,8 @@ let calculator = {
                 + ' ' + num2; 
     }
 }
+
+//CSS Buttons
 
 document.getElementById('button7').addEventListener('click', e => {
     e.stopPropagation;
@@ -167,7 +177,7 @@ document.getElementById('button0').addEventListener('click', e => {
 });
 document.getElementById('button.').addEventListener('click', e => {
     e.stopPropagation;
-    calculator.storeOperator('.');
+    calculator.storeInput('.');
 });
 document.getElementById('button=').addEventListener('click', e => {
     e.stopPropagation;
@@ -176,4 +186,8 @@ document.getElementById('button=').addEventListener('click', e => {
 document.getElementById('button+').addEventListener('click', e => {
     e.stopPropagation;
     calculator.storeOperator('+');
+});
+document.getElementById('buttonClear').addEventListener('click', e => {
+    e.stopPropagation;
+    calculator.clear();
 });
