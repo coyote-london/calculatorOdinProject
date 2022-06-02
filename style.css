@@ -9,7 +9,7 @@ body{
     display: flex;
 }
 
-.displayContent {
+#displayContent {
     color: rgb(177, 170, 102);
     font-weight: 700;
     font-size: 4.5vw;

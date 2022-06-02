@@ -17,6 +17,11 @@ let calculator = {
     storeInput(num){
         if (this.operatorStored == undefined) this.numberFirst = undefined; 
         this.input = this.input + num;
+        this.operatorStored == undefined ?
+            this.display(this.input)
+            :
+            this.display(this.numberFirst, 
+                this.operatorStored, this.input);
         console.log(this.input);
     }
     ,
@@ -30,18 +35,21 @@ let calculator = {
     }
     ,
     storeOperator(symbol) {
+        
         if (this.operatorStored == undefined) { 
             this.operatorStored = symbol;
             this.storeNumber();
+            this.display(this.numberFirst, this.operatorStored);
             console.log(this.operatorStored)
         }
+        
         else {
             this.operatorUsed = this.operatorStored;
-            this.runOperation(this.operatorUsed);
-            symbol == '=' ?
+            symbol == '=' ?     
                 this.operatorStored = undefined
                 :
                 this.operatorStored = symbol;
+            this.runOperation(this.operatorUsed);
             console.log(this.operatorStored);
         }
     }
@@ -68,26 +76,40 @@ let calculator = {
     add(num1, num2) {
         this.numberFirst = num1 + num2;
         console.log(this.numberFirst)
+        this.display(this.numberFirst, this.operatorStored);
         this.input = '';
         
     }
     ,
     subtract(num1, num2) {
         this.numberFirst = num1 - num2;
+        this.display(this.numberFirst, this.operatorStored);
         console.log(this.numberFirst)
         this.input = '';
     }
     ,
     divide(num1, num2) {
         this.numberFirst = num1 / num2;
+        this.display(this.numberFirst, this.operatorStored);
         console.log(this.numberFirst)
         this.input = '';
     }
     ,
     multiply(num1, num2) {
         this.numberFirst = num1 * num2;
+        this.display(this.numberFirst, this.operatorStored);
         console.log(this.numberFirst)
         this.input = '';
+    }
+    ,
+    display(num1, operator='', num2='') {
+            operator == '' ?
+            document.getElementById('displayContent')
+                .innerHTML = num1
+            :
+            document.getElementById('displayContent')
+                .innerHTML = num1 + ' ' + operator 
+                + ' ' + num2; 
     }
 }
 
