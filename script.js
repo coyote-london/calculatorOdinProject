@@ -25,6 +25,69 @@ let calculator = {
         console.log(this.input);
     }
     ,
+    keyInput(e) {
+        console.log(e.key);
+        switch(e.key) {
+            case '1':
+                calculator.storeInput(1);
+                break;
+            case '2':
+                calculator.storeInput(2);
+                break;
+            case '3':
+                calculator.storeInput(3);
+                break;
+            case '4':
+                calculator.storeInput(4);
+                break;
+            case '5':
+                calculator.storeInput(5);
+                break;
+            case '6':
+                calculator.storeInput(6);
+                break;
+            case '7':
+                calculator.storeInput(7);
+                break;
+            case '8':
+                calculator.storeInput(8);
+                break;
+            case '9':
+                calculator.storeInput(9);
+                break;
+            case '0':
+                calculator.storeInput(0);
+                break;
+            case '.':
+                calculator.storeInput('.');
+                break;
+            case '+':
+                calculator.storeOperator('+');
+                break;
+            case '-':
+                calculator.storeOperator('-');
+                break;
+            case '*':
+                calculator.storeOperator('*');
+                break;
+            case '/':
+                calculator.storeOperator('/');
+                break;
+            case 'Backspace':
+                calculator.clear();
+                break;
+            case ' ':
+                calculator.storeOperator('=');
+                break;
+            case 'Enter':
+                calculator.storeOperator('=');
+                break;
+            case '=':
+                calculator.storeOperator('=');
+                break;
+        }
+    }
+    ,
     storeNumber(){
         this.numberFirst == undefined 
         ?
@@ -191,3 +254,4 @@ document.getElementById('buttonClear').addEventListener('click', e => {
     e.stopPropagation;
     calculator.clear();
 });
+window.addEventListener('keydown', calculator.keyInput)
