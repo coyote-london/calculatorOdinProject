@@ -1,19 +1,23 @@
-//Rewrite the logic on storing the numbers 
-//and running equations
-//Maybe work the logic to display the numbers first?
-//may make testing easier that way if you get frusturated
-
 let calculator = {
-    input: ''
-    ,
-    numberFirst: undefined
-    ,
-    numberSecond: undefined
-    ,
-    operatorStored: undefined
-    ,
-    operatorUsed: undefined
-    ,
+
+
+    //Data
+
+
+    input: '',
+
+    numberFirst: undefined,
+
+    numberSecond: undefined,
+
+    operatorStored: undefined,
+
+    operatorUsed: undefined,
+    
+    
+    //Storing data
+
+
     storeInput(num){
         if (this.operatorStored == undefined) this.numberFirst = undefined; 
         this.input = this.input + num;
@@ -23,8 +27,39 @@ let calculator = {
             this.display(this.numberFirst, 
                 this.operatorStored, this.input);
         console.log(this.input);
-    }
-    ,
+    },
+
+    
+    storeNumber(){
+        this.numberFirst == undefined 
+        ?
+        this.numberFirst = parseFloat(this.input) 
+        :
+        this.numberSecond = parseFloat(this.input);
+        this.input = '';
+    },
+
+
+    storeOperator(symbol) {        
+        if (this.operatorStored == undefined) { 
+            this.operatorStored = symbol;
+            this.storeNumber();
+            this.display(this.numberFirst, this.operatorStored);
+            console.log(this.operatorStored)
+        }
+        
+        else {
+            this.operatorUsed = this.operatorStored;
+            symbol == '=' ?     
+                this.operatorStored = undefined
+                :
+                this.operatorStored = symbol;
+            this.runOperation(this.operatorUsed);
+            console.log(this.operatorStored);
+        }
+    },
+
+    
     keyInput(e) {
         console.log(e.key);
         switch(e.key) {
@@ -86,37 +121,54 @@ let calculator = {
                 calculator.storeOperator('=');
                 break;
         }
-    }
-    ,
-    storeNumber(){
-        this.numberFirst == undefined 
-        ?
-        this.numberFirst = parseFloat(this.input) 
-        :
-        this.numberSecond = parseFloat(this.input);
+    },
+    
+
+    //Change Data
+
+
+    add(num1, num2) {
+        this.numberFirst = num1 + num2;
+        console.log(this.numberFirst)
+        this.display(this.numberFirst, this.operatorStored);
         this.input = '';
-    }
-    ,
-    storeOperator(symbol) {
         
-        if (this.operatorStored == undefined) { 
-            this.operatorStored = symbol;
-            this.storeNumber();
-            this.display(this.numberFirst, this.operatorStored);
-            console.log(this.operatorStored)
-        }
-        
-        else {
-            this.operatorUsed = this.operatorStored;
-            symbol == '=' ?     
-                this.operatorStored = undefined
-                :
-                this.operatorStored = symbol;
-            this.runOperation(this.operatorUsed);
-            console.log(this.operatorStored);
-        }
-    }
-    ,
+    },
+
+    
+    subtract(num1, num2) {
+        this.numberFirst = num1 - num2;
+        this.display(this.numberFirst, this.operatorStored);
+        console.log(this.numberFirst)
+        this.input = '';
+    },
+
+    
+    divide(num1, num2) {
+        this.numberFirst = num1 / num2;
+        this.display(this.numberFirst, this.operatorStored);
+        console.log(this.numberFirst)
+        this.input = '';
+    },
+
+    
+    multiply(num1, num2) {
+        this.numberFirst = num1 * num2;
+        this.display(this.numberFirst, this.operatorStored);
+        console.log(this.numberFirst)
+        this.input = '';
+    },
+
+    
+    clear() {
+        this.numberFirst = undefined;
+        this.operatorStored = undefined;
+        this.numberSecond = undefined;
+        this.input = '';
+        this.display(0);
+    },
+
+    
     runOperation(operator) {
         this.storeNumber(this.input)
         console.log(this.numberFirst + ' ' + this.operatorUsed + ' ' + this.numberSecond); 
@@ -134,45 +186,12 @@ let calculator = {
                 this.divide(this.numberFirst, this.numberSecond);
                 break;
         }
-    }
-    ,
-    add(num1, num2) {
-        this.numberFirst = num1 + num2;
-        console.log(this.numberFirst)
-        this.display(this.numberFirst, this.operatorStored);
-        this.input = '';
-        
-    }
-    ,
-    subtract(num1, num2) {
-        this.numberFirst = num1 - num2;
-        this.display(this.numberFirst, this.operatorStored);
-        console.log(this.numberFirst)
-        this.input = '';
-    }
-    ,
-    divide(num1, num2) {
-        this.numberFirst = num1 / num2;
-        this.display(this.numberFirst, this.operatorStored);
-        console.log(this.numberFirst)
-        this.input = '';
-    }
-    ,
-    multiply(num1, num2) {
-        this.numberFirst = num1 * num2;
-        this.display(this.numberFirst, this.operatorStored);
-        console.log(this.numberFirst)
-        this.input = '';
-    }
-    ,
-    clear() {
-        this.numberFirst = undefined;
-        this.operatorStored = undefined;
-        this.numberSecond = undefined;
-        this.input = '';
-        this.display(0);
-    }
-    ,
+    },
+
+
+    //Display Data
+
+
     display(num1, operator='', num2='') {
             operator == '' ?
             document.getElementById('displayContent')
@@ -184,7 +203,9 @@ let calculator = {
     }
 }
 
-//CSS Buttons
+
+//Event listeners
+
 
 document.getElementById('button7').addEventListener('click', e => {
     e.stopPropagation;
