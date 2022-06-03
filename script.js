@@ -13,6 +13,8 @@ let calculator = {
     operatorStored: undefined,
 
     operatorUsed: undefined,
+
+    decimalUsed: false,
     
     
     //Storing data
@@ -20,6 +22,11 @@ let calculator = {
 
     storeInput(num){
         if (this.operatorStored == undefined) this.numberFirst = undefined; 
+        
+
+        //try to make it so you can't put 2 decimals in a number
+        
+        
         this.input = this.input + num;
         this.operatorStored == undefined ?
             this.display(this.input)
@@ -42,10 +49,12 @@ let calculator = {
 
     storeOperator(symbol) {        
         if (this.operatorStored == undefined) { 
+            if (symbol == '=') return;
             this.operatorStored = symbol;
             this.storeNumber();
             this.display(this.numberFirst, this.operatorStored);
             console.log(this.operatorStored)
+            this.decimalUsed = false;
         }
         
         else {
@@ -58,7 +67,20 @@ let calculator = {
             console.log(this.operatorStored);
         }
     },
-
+    
+    
+    storeDecimal() {
+        if (this.decimalUsed == false) {
+            this.input = this.input + '.';
+            this.operatorStored == undefined ?
+                this.display(this.input)
+                :
+                this.display(this.numberFirst, 
+                    this.operatorStored, this.input)
+        }
+        this.decimalUsed = true;
+    },
+    
     
     keyInput(e) {
         console.log(e.key);
@@ -94,7 +116,7 @@ let calculator = {
                 calculator.storeInput(0);
                 break;
             case '.':
-                calculator.storeInput('.');
+                calculator.storeDecimal();
                 break;
             case '+':
                 calculator.storeOperator('+');
@@ -145,6 +167,10 @@ let calculator = {
 
     
     divide(num1, num2) {
+        if (num2 == 0) {
+            this.display("Infinity I guess");
+            return;
+        }
         this.numberFirst = num1 / num2;
         this.display(this.numberFirst, this.operatorStored);
         console.log(this.numberFirst)
@@ -201,7 +227,7 @@ let calculator = {
                 .innerHTML = num1 + ' ' + operator 
                 + ' ' + num2; 
     }
-}
+};
 
 
 //Event listeners
@@ -261,7 +287,7 @@ document.getElementById('button0').addEventListener('click', e => {
 });
 document.getElementById('button.').addEventListener('click', e => {
     e.stopPropagation;
-    calculator.storeInput('.');
+    calculator.storeDecimal();
 });
 document.getElementById('button=').addEventListener('click', e => {
     e.stopPropagation;
