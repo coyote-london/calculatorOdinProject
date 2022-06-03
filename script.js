@@ -24,16 +24,17 @@ let calculator = {
         if (this.operatorStored == undefined) {
             this.numberFirst = undefined; 
         }
+        
         this.input == '0' ?
             this.input = '' + num
             :
             this.input = this.input + num;
+        
         this.operatorStored == undefined ?
-            this.display(this.input)
+            this.display(this.input) 
             :
             this.display(this.numberFirst, 
-                this.operatorStored, this.input);
-        console.log(this.input);
+                this.operatorStored, this.input); // line 238
     },
 
     
@@ -53,7 +54,6 @@ let calculator = {
             this.operatorStored = symbol;
             this.storeNumber();
             this.display(this.numberFirst, this.operatorStored);
-            console.log(this.operatorStored)
             this.decimalUsed = false;
         }
         
@@ -64,7 +64,6 @@ let calculator = {
                 :
                 this.operatorStored = symbol;
             this.runOperation(this.operatorUsed);
-            console.log(this.operatorStored);
         }
     },
     
@@ -83,7 +82,6 @@ let calculator = {
     
     
     keyInput(e) {
-        console.log(e.key);
         switch(e.key) {
             case '1':
                 calculator.storeInput(1);
@@ -151,7 +149,6 @@ let calculator = {
 
     add(num1, num2) {
         this.numberFirst = num1 + num2;
-        console.log(this.numberFirst)
         this.display(this.numberFirst, this.operatorStored);
         this.input = '';
         
@@ -161,7 +158,6 @@ let calculator = {
     subtract(num1, num2) {
         this.numberFirst = num1 - num2;
         this.display(this.numberFirst, this.operatorStored);
-        console.log(this.numberFirst)
         this.input = '';
     },
 
@@ -169,11 +165,11 @@ let calculator = {
     divide(num1, num2) {
         if (num2 == 0) {
             this.display("Infinity?");
+            this.input = '0';
             return;
         }
         this.numberFirst = num1 / num2;
         this.display(this.numberFirst, this.operatorStored);
-        console.log(this.numberFirst)
         this.input = '';
     },
 
@@ -181,7 +177,6 @@ let calculator = {
     multiply(num1, num2) {
         this.numberFirst = num1 * num2;
         this.display(this.numberFirst, this.operatorStored);
-        console.log(this.numberFirst)
         this.input = '';
     },
 
@@ -213,7 +208,6 @@ let calculator = {
     
     runOperation(operator) {
         this.storeNumber(this.input)
-        console.log(this.numberFirst + ' ' + this.operatorUsed + ' ' + this.numberSecond); 
         switch(operator) {
             case '+':
                 this.add(this.numberFirst, this.numberSecond);
@@ -317,4 +311,5 @@ document.getElementById('buttonClear').addEventListener('click', e => {
     e.stopPropagation;
     calculator.clear();
 });
+
 window.addEventListener('keydown', calculator.keyInput)
