@@ -21,13 +21,13 @@ let calculator = {
 
 
     storeInput(num){
-        if (this.operatorStored == undefined) this.numberFirst = undefined; 
-        
-
-        //try to make it so you can't put 2 decimals in a number
-        
-        
-        this.input = this.input + num;
+        if (this.operatorStored == undefined) {
+            this.numberFirst = undefined; 
+        }
+        this.input == '0' ?
+            this.input = '' + num
+            :
+            this.input = this.input + num;
         this.operatorStored == undefined ?
             this.display(this.input)
             :
@@ -131,10 +131,10 @@ let calculator = {
                 calculator.storeOperator('/');
                 break;
             case 'Backspace':
-                calculator.clear();
+                calculator.backspace();
                 break;
             case ' ':
-                calculator.storeOperator('=');
+                calculator.clear();
                 break;
             case 'Enter':
                 calculator.storeOperator('=');
@@ -194,6 +194,22 @@ let calculator = {
         this.display(0);
     },
 
+
+    backspace() {
+        if (this.input.length > 0) {
+            this.input = this.input.slice(0, -1)
+            if (this.input == '') this.input = '0';
+        }
+        else if (this.operatorStored != undefined) {
+            this.operatorStored = undefined;
+            this.input = this.numberFirst.toString();
+        }
+        this.operatorStored == undefined ?
+            this.display(this.input)
+            :
+            this.display(this.numberFirst, 
+                this.operatorStored, this.input);
+    },
     
     runOperation(operator) {
         this.storeNumber(this.input)
