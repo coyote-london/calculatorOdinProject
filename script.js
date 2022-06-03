@@ -168,7 +168,7 @@ let calculator = {
     
     divide(num1, num2) {
         if (num2 == 0) {
-            this.display("Infinity I guess");
+            this.display("Infinity?");
             return;
         }
         this.numberFirst = num1 / num2;
