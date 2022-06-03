@@ -307,6 +307,10 @@ document.getElementById('button+').addEventListener('click', e => {
     e.stopPropagation;
     calculator.storeOperator('+');
 });
+document.getElementById('buttonBackspace').addEventListener('click', e => {
+    e.stopPropagation;
+    calculator.backspace();
+});
 document.getElementById('buttonClear').addEventListener('click', e => {
     e.stopPropagation;
     calculator.clear();
