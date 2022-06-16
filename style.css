@@ -60,3 +60,9 @@ body{
     background-color: rgb(51, 51, 40);
     color: rgb(177, 170, 102);   
 }
+
+button:active {
+    background-color:rgb(177, 170, 102);
+    color:rgb(51, 51, 40);
+    border: .4vw solid rgb(51, 51, 40);
+}
